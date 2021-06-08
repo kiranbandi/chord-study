@@ -8,7 +8,7 @@ export default class ChordDiagram extends Component {
     componentDidMount() {
 
         let { names, data } = this.props,
-            colors = d3.quantize(d3.interpolateViridis, names.length);
+            colors = d3.schemeTableau10;
 
         let parallelData = [];
 
@@ -16,28 +16,32 @@ export default class ChordDiagram extends Component {
 
         _.map(data, (d, outerIndex) => {
             _.map(d, (p, innerIndex) => {
-                let INmigrationKey = names[outerIndex] + '-' + names[innerIndex],
-                    OUTmigrationKey = names[innerIndex] + '-' + names[outerIndex];
-                if (mapList.indexOf(INmigrationKey) == -1 && mapList.indexOf(OUTmigrationKey) == -1) {
-                    var dataPoint = { 'source': names[outerIndex], 'target': names[innerIndex], 'value': p }
-                    mapList.push(INmigrationKey);
-                    mapList.push(OUTmigrationKey);
-                    parallelData.push(dataPoint);
+                // Filter out empty links where there is no flow
+                if (p != 0) {
+                    let INmigrationKey = names[outerIndex] + '-' + names[innerIndex],
+                        OUTmigrationKey = names[innerIndex] + '-' + names[outerIndex];
+                    if (mapList.indexOf(INmigrationKey) == -1 && mapList.indexOf(OUTmigrationKey) == -1) {
+                        var dataPoint = { 'source': names[outerIndex], 'target': names[innerIndex], 'value': p }
+                        mapList.push(INmigrationKey);
+                        mapList.push(OUTmigrationKey);
+                        parallelData.push(dataPoint);
+                    }
                 }
+
             });
         });
 
         let keys = ['source', 'target'];
         let color = d3.scaleOrdinal(names, colors);
 
-        let width = 975, height = 975;
+        let width = 750, height = 750;
 
         let sankeys = sankey()
             .nodeSort(null)
             .linkSort(null)
-            .nodeWidth(4)
+            .nodeWidth(10)
             .nodePadding(20)
-            .extent([[0, 5], [width, height - 5]]);
+            .extent([[100, 5], [width - 100, height - 5]]);
 
 
         let graph = graphifyData(keys, parallelData);
@@ -58,6 +62,8 @@ export default class ChordDiagram extends Component {
             .attr("y", d => d.y0)
             .attr("height", d => d.y1 - d.y0)
             .attr("width", d => d.x1 - d.x0)
+            .attr("fill", d => color(d.name))
+            .attr("stroke", 'white')
             .append("title")
             .text(d => `${d.name}\n${d.value.toLocaleString()}`);
 
@@ -75,25 +81,29 @@ export default class ChordDiagram extends Component {
 
         svg.append("g")
             .style("font", "10px sans-serif")
-            .style("fill", "white")
+            .style("font-weight", "bolder")
+            .style("fill", "black")
             .selectAll("text")
             .data(nodes)
             .join("text")
-            .attr("x", d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+            .attr("x", function (d){
+                return d.x0 < width / 2 ? d.x1-15 : d.x0 + 15;
+            })
             .attr("y", d => (d.y1 + d.y0) / 2)
             .attr("dy", "0.35em")
-            .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
-            .text(d => d.name)
-            .append("tspan")
-            .attr("fill-opacity", 0.7)
-            .text(d => ` ${d.value.toLocaleString()}`);
+            .attr("text-anchor", d => d.x0 < width / 2 ? "end" : "start")
+            .text(d => d.name);
 
     }
 
     render() {
         // set the dimensions of the graph
         return (
-            <svg id='sankey-diagram-anchor'></svg>
+            <div>
+                <h3 className="m-t-lg">Source Country <span>&#8594;</span> Target Country</h3>
+                <svg className="m-t-0" id='sankey-diagram-anchor'></svg>
+            </div>
+
         );
     }
 }

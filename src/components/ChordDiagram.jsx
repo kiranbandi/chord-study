@@ -7,9 +7,9 @@ export default class ChordDiagram extends Component {
     componentDidMount() {
 
         let { names, data } = this.props,
-            colors = d3.quantize(d3.interpolateViridis, names.length);
+            colors = d3.schemeTableau10;
 
-        let height = 500, width = 500,
+        let height = 700, width = 700,
             outerRadius = Math.min(width, height) * 0.5 - 80,
             innerRadius = outerRadius - 10;
 
@@ -33,7 +33,7 @@ export default class ChordDiagram extends Component {
             .innerRadius(innerRadius)
             .outerRadius(outerRadius);
 
-        let ribbon = d3.ribbon()
+        let ribbon = d3.ribbonArrow()
             .radius(innerRadius - 1)
             .padAngle(1 / innerRadius);
 
@@ -46,7 +46,7 @@ export default class ChordDiagram extends Component {
         const chords = chord(data);
 
         const group = svg.append("g")
-            .attr("font-size", 10)
+            .attr("font-size", 12)
             .attr("font-family", "sans-serif")
             .selectAll("g")
             .data(chords.groups)
@@ -67,13 +67,13 @@ export default class ChordDiagram extends Component {
             .attr("transform", d => `rotate(${d.angle * 180 / Math.PI - 90}) translate(${outerRadius},0)`);
 
         groupTick.append("line")
-            .attr("stroke", "currentColor")
+            .attr("stroke", "white")
             .attr("x2", 6);
 
         groupTick.append("text")
             .attr("x", 8)
             .attr("dy", "0.35em")
-            .style("font", "7px sans-serif")
+            .style("font", "12px sans-serif")
             .attr("transform", d => d.angle > Math.PI ? "rotate(180) translate(-16)" : null)
             .attr("text-anchor", d => d.angle > Math.PI ? "end" : null)
             .text(d => formatValue(d.value));
