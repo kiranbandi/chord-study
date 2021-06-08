@@ -34,14 +34,14 @@ export default class ChordDiagram extends Component {
         let keys = ['source', 'target'];
         let color = d3.scaleOrdinal(names, colors);
 
-        let width = 750, height = 750;
+        let width = 700, height = 700;
 
         let sankeys = sankey()
             .nodeSort(null)
             .linkSort(null)
             .nodeWidth(10)
-            .nodePadding(20)
-            .extent([[100, 5], [width - 100, height - 5]]);
+            .nodePadding(5)
+            .extent([[100, 35], [width - 100, height - 35]]);
 
 
         let graph = graphifyData(keys, parallelData);
@@ -63,11 +63,11 @@ export default class ChordDiagram extends Component {
             .attr("height", d => d.y1 - d.y0)
             .attr("width", d => d.x1 - d.x0)
             .attr("fill", d => color(d.name))
-            .attr("stroke", 'white')
             .append("title")
             .text(d => `${d.name}\n${d.value.toLocaleString()}`);
 
         svg.append("g")
+            .attr("stroke-opacity", 0.8)
             .attr("fill", "none")
             .selectAll("g")
             .data(links)
@@ -80,14 +80,14 @@ export default class ChordDiagram extends Component {
             .text(d => `${d.names.join(" → ")}\n${d.value.toLocaleString()}`);
 
         svg.append("g")
-            .style("font", "10px sans-serif")
+            .style("font", "12px sans-serif")
             .style("font-weight", "bolder")
             .style("fill", "black")
             .selectAll("text")
             .data(nodes)
             .join("text")
-            .attr("x", function (d){
-                return d.x0 < width / 2 ? d.x1-15 : d.x0 + 15;
+            .attr("x", function (d) {
+                return d.x0 < width / 2 ? d.x1 - 15 : d.x0 + 15;
             })
             .attr("y", d => (d.y1 + d.y0) / 2)
             .attr("dy", "0.35em")
@@ -99,9 +99,9 @@ export default class ChordDiagram extends Component {
     render() {
         // set the dimensions of the graph
         return (
-            <div>
-                <h3 className="m-t-lg">Source Country <span>&#8594;</span> Target Country</h3>
-                <svg className="m-t-0" id='sankey-diagram-anchor'></svg>
+            <div className='sankey-wrapper'>
+                <svg className="m-b-0" id='sankey-diagram-anchor'></svg>
+                <h4 className="m-t-0">Source Country <span>&#8594;</span> Target Country</h4>
             </div>
 
         );

@@ -1,13 +1,16 @@
 .dashboard-root {
     #chord-diagram-anchor {
-        margin: 40px auto;
-        width: 50%;
-        display: block;
+        width: 45%;
+        display: inline-block;
+        vertical-align: top;
     }
 
-    #sankey-diagram-anchor {
-        margin: 40px auto;
-        width: 75%;
-        display: block;
+    .sankey-wrapper {
+        width: 45%;
+        display: inline-block;
+        vertical-align: top;
+        #sankey-diagram-anchor {
+            width: 100%;
+        }
     }
 }
