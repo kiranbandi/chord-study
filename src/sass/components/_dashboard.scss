@@ -1,5 +1,5 @@
 .dashboard-root {
-    #chord-diagram-anchor {
+    .chord-diagram {
         width: 45%;
         display: inline-block;
         vertical-align: top;
@@ -9,7 +9,7 @@
         width: 45%;
         display: inline-block;
         vertical-align: top;
-        #sankey-diagram-anchor {
+        .sankey-diagram {
             width: 100%;
         }
     }

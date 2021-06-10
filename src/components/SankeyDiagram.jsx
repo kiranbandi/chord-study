@@ -3,6 +3,7 @@ import _ from 'lodash';
 import * as d3 from 'd3';
 import { sankey, sankeyLinkHorizontal } from 'd3-sankey';
 
+
 export default class ChordDiagram extends Component {
 
     componentDidMount() {
@@ -20,16 +21,16 @@ export default class ChordDiagram extends Component {
                 if (p != 0) {
                     let INmigrationKey = names[outerIndex] + '-' + names[innerIndex],
                         OUTmigrationKey = names[innerIndex] + '-' + names[outerIndex];
-                    if (mapList.indexOf(INmigrationKey) == -1 && mapList.indexOf(OUTmigrationKey) == -1) {
                         var dataPoint = { 'source': names[outerIndex], 'target': names[innerIndex], 'value': p }
                         mapList.push(INmigrationKey);
                         mapList.push(OUTmigrationKey);
                         parallelData.push(dataPoint);
-                    }
                 }
 
             });
         });
+
+        console.log(parallelData);
 
         let keys = ['source', 'target'];
         let color = d3.scaleOrdinal(names, colors);
@@ -40,13 +41,13 @@ export default class ChordDiagram extends Component {
             .nodeSort(null)
             .linkSort(null)
             .nodeWidth(10)
-            .nodePadding(5)
+            .nodePadding(10)
             .extent([[100, 35], [width - 100, height - 35]]);
 
 
         let graph = graphifyData(keys, parallelData);
 
-        const svg = d3.select("#sankey-diagram-anchor")
+        const svg = d3.select('#' + this.props.id)
             .attr("viewBox", [0, 0, width, height]);
 
         const { nodes, links } = sankeys({
@@ -100,8 +101,7 @@ export default class ChordDiagram extends Component {
         // set the dimensions of the graph
         return (
             <div className='sankey-wrapper'>
-                <svg className="m-b-0" id='sankey-diagram-anchor'></svg>
-                <h4 className="m-t-0">Source Country <span>&#8594;</span> Target Country</h4>
+                <svg className="m-b-0 sankey-diagram" id={this.props.id}></svg>
             </div>
 
         );

@@ -39,7 +39,7 @@ export default class ChordDiagram extends Component {
 
         let color = d3.scaleOrdinal(names, colors);
 
-        const svg = d3.select('#chord-diagram-anchor');
+        const svg = d3.select('#' + this.props.id);
 
         svg.attr("viewBox", [-width / 2, -height / 2, width, height]);
 
@@ -102,7 +102,7 @@ export default class ChordDiagram extends Component {
     render() {
         // set the dimensions of the graph
         return (
-            <svg id='chord-diagram-anchor'></svg>
+            <svg className='chord-diagram' id={this.props.id}></svg>
         );
     }
 }

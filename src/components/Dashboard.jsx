@@ -4,7 +4,9 @@ import { bindActionCreators } from 'redux';
 import Loader from 'react-loading';
 import { getFile } from '../utils/fetchData';
 import _ from 'lodash';
-import { ChordDiagram,SankeyDiagram } from './';
+import { ChordDiagram, SankeyDiagram } from './';
+import dataReference from '../utils/dataReference';
+import { inv } from 'mathjs';
 
 class Dashboard extends Component {
 
@@ -21,17 +23,46 @@ class Dashboard extends Component {
         // Turn loader onON
         this.setState({ 'loader': true });
 
-        getFile('data/data.csv')
+        var names = [], chordData = [];
+
+        getFile('data/immigration_data.csv')
             .then((data) => {
-                var dataMatrix = data.trim().split('\n').map((d) => d.trim().split(' '));
+                let dataMatrix = data.trim().split('\n').map((d) => d.trim().split(' '));
+                names.push(dataMatrix.slice(0, 1)[0]);
+                chordData.push(dataMatrix.slice(1).map((d) => d.slice(1).map(t => +t)));
+                return getFile('data/phone_data.csv');
+            })
+            .then((data) => {
+                let dataMatrix = data.trim().split('\n').map((d) => d.trim().split(' '));
+                names.push(dataMatrix.slice(0, 1)[0]);
 
-                var names = dataMatrix.slice(0, 1)[0],
-                    chordData = dataMatrix.slice(1).map((d)=> d.slice(1).map(t=>+t));
+                let matrix = dataMatrix.slice(1).map((d) => d.slice(1).map(t => +t));
+                let newMatrix = _.cloneDeep(matrix);
+                for (let i = 0; i < 8; i++) {
+                    for (let j = 0; j < 8; j++) {
+                        newMatrix[i][j] = matrix[j][i];
+                    }
+                }
 
-                this.setState({ names, chordData })
+                chordData.push(newMatrix);
+                return getFile('data/euro_crisis.csv');
+            })
+            .then((data) => {
+                let dataMatrix = data.trim().split('\n').map((d) => d.trim().split(' '));
+                names.push(dataMatrix.slice(0, 1)[0]);
+                chordData.push(dataMatrix.slice(1).map((d) => d.slice(1).map(t => +t)));
+
+                return getFile('data/space_investment.csv')
+            })
+            .then((data) => {
+                let dataMatrix = data.trim().split('\n').map((d) => d.trim().split(' '));
+                names.push(dataMatrix.slice(0, 1)[0]);
+                chordData.push(dataMatrix.slice(1).map((d) => d.slice(1).map(t => +t)));
+
+                this.setState({ names, chordData });
             })
             .catch(() => {
-                alert("Sorry there was an error in fetching and parsing the dataset");
+                alert("Sorry there was an error in fetching and parsing the datasets");
                 console.log('error');
             })
             .finally(() => { this.setState({ 'loader': false }) });
@@ -41,14 +72,20 @@ class Dashboard extends Component {
     render() {
 
         const { loader = false, names, chordData } = this.state;
+
         // set the dimensions of the graph
         return (
             <div className='dashboard-root container-fluid'>
                 {loader ?
                     <Loader className='loading-spinner' type='spin' height='100px' width='100px' color='#d6e5ff' delay={- 1} /> :
-                    <div className='dashboard-inner-root text-center'>
-                        {names.length > 0 && <ChordDiagram data={chordData} names={names} />}
-                        {names.length > 0 && <SankeyDiagram data={chordData} names={names} />}
+
+                    <div className='dashboard-inner-root text-center container'>
+                        {_.map(names, (nameList, nameIndex) =>
+                            <div key={nameIndex} className='row m-b-lg'>
+                                <h3>{dataReference[nameIndex].name}</h3>
+                                {nameList.length > 0 && <ChordDiagram id={"chord" + "-" + nameIndex} data={chordData[nameIndex]} names={nameList} />}
+                                {nameList.length > 0 && <SankeyDiagram id={"sankey" + "-" + nameIndex} data={chordData[nameIndex]} names={nameList} />}
+                            </div>)}
                     </div>}
 
             </div>
