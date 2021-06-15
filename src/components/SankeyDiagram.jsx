@@ -26,11 +26,8 @@ export default class ChordDiagram extends Component {
                         mapList.push(OUTmigrationKey);
                         parallelData.push(dataPoint);
                 }
-
             });
         });
-
-        console.log(parallelData);
 
         let keys = ['source', 'target'];
         let color = d3.scaleOrdinal(names, colors);
@@ -42,7 +39,7 @@ export default class ChordDiagram extends Component {
             .linkSort(null)
             .nodeWidth(10)
             .nodePadding(10)
-            .extent([[100, 35], [width - 100, height - 35]]);
+            .extent([[125, 35], [width - 125, height - 35]]);
 
 
         let graph = graphifyData(keys, parallelData);

@@ -10,19 +10,10 @@ export default class ChordDiagram extends Component {
             colors = d3.schemeTableau10;
 
         let height = 700, width = 700,
-            outerRadius = Math.min(width, height) * 0.5 - 80,
+            outerRadius = Math.min(width, height) * 0.5 - 125,
             innerRadius = outerRadius - 10;
 
-        let tickStep = d3.tickStep(0, d3.sum(data.flat()), 100);
-
         let formatValue = d3.format(".2");
-
-        function ticks({ startAngle, endAngle, value }) {
-            const k = (endAngle - startAngle) / value;
-            return d3.range(0, value, tickStep).map(value => {
-                return { value, angle: value * k + startAngle };
-            });
-        }
 
         let chord = d3.chordDirected()
             .padAngle(10 / innerRadius)
@@ -57,34 +48,24 @@ export default class ChordDiagram extends Component {
             .attr("d", arc);
 
         group.append("title")
-            .text(d => `${names[d.index]}
-      ${formatValue(d.value)}`);
+            .text(d => `${names[d.index]} ${formatValue(d.value)}`);
 
-        const groupTick = group.append("g")
-            .selectAll("g")
-            .data(ticks)
-            .join("g")
-            .attr("transform", d => `rotate(${d.angle * 180 / Math.PI - 90}) translate(${outerRadius},0)`);
+        const groupLabel = group.append("g")
+            .attr("transform", d => {
+                return `rotate(${(((d.endAngle - d.startAngle) / 2) + d.startAngle) * 180 / Math.PI - 90}) translate(${outerRadius},0)`;
+            });
 
-        groupTick.append("line")
-            .attr("stroke", "white")
+        groupLabel.append("line")
+            .attr("stroke", "black")
             .attr("x2", 6);
 
-        groupTick.append("text")
+        groupLabel.append("text")
             .attr("x", 8)
             .attr("dy", "0.35em")
-            .style("font", "12px sans-serif")
-            .attr("transform", d => d.angle > Math.PI ? "rotate(180) translate(-16)" : null)
-            .attr("text-anchor", d => d.angle > Math.PI ? "end" : null)
-            .text(d => formatValue(d.value));
-
-        group.select("text")
-            .attr("font-weight", "bold")
-            .text(function (d) {
-                return this.getAttribute("text-anchor") === "end"
-                    ? `↑ ${names[d.index]}`
-                    : `${names[d.index]} ↓`;
-            });
+            .style("font", "bolder 12px sans-serif")
+            .attr("transform", d => (((d.endAngle - d.startAngle) / 2) + d.startAngle) > Math.PI ? "rotate(180) translate(-16)" : null)
+            .attr("text-anchor", d => (((d.endAngle - d.startAngle) / 2) + d.startAngle) > Math.PI ? "end" : null)
+            .text(d => names[d.index]);
 
         svg.append("g")
             .attr("fill-opacity", 0.8)
