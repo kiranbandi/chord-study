@@ -6,7 +6,6 @@ import { getFile } from '../utils/fetchData';
 import _ from 'lodash';
 import { ChordDiagram, SankeyDiagram } from './';
 import dataReference from '../utils/dataReference';
-import { inv } from 'mathjs';
 
 class Dashboard extends Component {
 
@@ -25,7 +24,14 @@ class Dashboard extends Component {
 
         var names = [], chordData = [];
 
-        getFile('data/immigration_data.csv')
+
+        getFile('data/sample_data.csv')
+            .then((data) => {
+                let dataMatrix = data.trim().split('\n').map((d) => d.trim().split(' '));
+                names.push(dataMatrix.slice(0, 1)[0]);
+                chordData.push(dataMatrix.slice(1).map((d) => d.slice(1).map(t => +t)));
+                return getFile('data/immigration_data.csv')
+            })
             .then((data) => {
                 let dataMatrix = data.trim().split('\n').map((d) => d.trim().split(' '));
                 names.push(dataMatrix.slice(0, 1)[0]);

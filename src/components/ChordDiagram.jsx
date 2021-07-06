@@ -66,6 +66,7 @@ export default class ChordDiagram extends Component {
             .attr("transform", d => (((d.endAngle - d.startAngle) / 2) + d.startAngle) > Math.PI ? "rotate(180) translate(-16)" : null)
             .attr("text-anchor", d => (((d.endAngle - d.startAngle) / 2) + d.startAngle) > Math.PI ? "end" : null)
             .text(d => names[d.index])
+            .style("cursor", "pointer")
             .attr('class','label-text-chord');
 
         svg.append("g")

@@ -91,6 +91,7 @@ export default class ChordDiagram extends Component {
             .attr("dy", "0.35em")
             .attr("text-anchor", d => d.x0 < width / 2 ? "end" : "start")
             .attr("class", "label-text-sankey")
+            .style("cursor", "pointer")
             .text(d => d.name);
 
         svg.selectAll('.label-text-sankey')
