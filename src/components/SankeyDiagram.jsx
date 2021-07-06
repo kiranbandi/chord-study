@@ -21,10 +21,10 @@ export default class ChordDiagram extends Component {
                 if (p != 0) {
                     let INmigrationKey = names[outerIndex] + '-' + names[innerIndex],
                         OUTmigrationKey = names[innerIndex] + '-' + names[outerIndex];
-                        var dataPoint = { 'source': names[outerIndex], 'target': names[innerIndex], 'value': p }
-                        mapList.push(INmigrationKey);
-                        mapList.push(OUTmigrationKey);
-                        parallelData.push(dataPoint);
+                    var dataPoint = { 'source': names[outerIndex], 'target': names[innerIndex], 'value': p }
+                    mapList.push(INmigrationKey);
+                    mapList.push(OUTmigrationKey);
+                    parallelData.push(dataPoint);
                 }
             });
         });
@@ -32,14 +32,14 @@ export default class ChordDiagram extends Component {
         let keys = ['source', 'target'];
         let color = d3.scaleOrdinal(names, colors);
 
-        let width = 700, height = 700;
+        let width = 700, height = 675;
 
         let sankeys = sankey()
             .nodeSort(null)
             .linkSort(null)
             .nodeWidth(10)
-            .nodePadding(10)
-            .extent([[125, 35], [width - 125, height - 35]]);
+            .nodePadding(20)
+            .extent([[135, 35], [width - 135, height - 35]]);
 
 
         let graph = graphifyData(keys, parallelData);
@@ -78,8 +78,8 @@ export default class ChordDiagram extends Component {
             .text(d => `${d.names.join(" → ")}\n${d.value.toLocaleString()}`);
 
         svg.append("g")
-            .style("font", "12px sans-serif")
-            .style("font-weight", "bolder")
+            .style("font", "15px sans-serif")
+            .style("font-weight", "bold")
             .style("fill", "black")
             .selectAll("text")
             .data(nodes)
@@ -90,7 +90,11 @@ export default class ChordDiagram extends Component {
             .attr("y", d => (d.y1 + d.y0) / 2)
             .attr("dy", "0.35em")
             .attr("text-anchor", d => d.x0 < width / 2 ? "end" : "start")
+            .attr("class", "label-text-sankey")
             .text(d => d.name);
+
+        svg.selectAll('.label-text-sankey')
+            .call(wrap, 100);
 
     }
 
@@ -104,7 +108,6 @@ export default class ChordDiagram extends Component {
         );
     }
 }
-
 
 
 function graphifyData(keys, data) {
@@ -147,4 +150,32 @@ function graphifyData(keys, data) {
         }
     }
     return { nodes, links };
+}
+
+
+function wrap(text, width) {
+    text.each(function () {
+        var text = d3.select(this),
+            words = text.text().split("-").reverse(),
+            word,
+            line = [],
+            lineNumber = 0,
+            lineHeight = 0.85, // ems
+            y = text.attr("y"),
+            x = text.attr('x'),
+            dy = parseFloat(text.attr("dy")),
+            tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
+
+        while (word = words.pop()) {
+            line.push(word);
+            tspan.text(line.join(" "));
+            if (tspan.node().getComputedTextLength() > width) {
+                line.pop();
+                tspan.text(line.join(" "));
+                line = [word];
+                tspan.attr('y', +y - 5);
+                tspan = text.append("tspan").attr("x", x).attr("y", +y - 5).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+            }
+        }
+    });
 }

@@ -9,7 +9,7 @@ export default class ChordDiagram extends Component {
         let { names, data } = this.props,
             colors = d3.schemeTableau10;
 
-        let height = 700, width = 700,
+        let height = 1000, width = 1000,
             outerRadius = Math.min(width, height) * 0.5 - 125,
             innerRadius = outerRadius - 10;
 
@@ -62,10 +62,11 @@ export default class ChordDiagram extends Component {
         groupLabel.append("text")
             .attr("x", 8)
             .attr("dy", "0.35em")
-            .style("font", "bolder 12px sans-serif")
+            .style("font", "bold 20px sans-serif")
             .attr("transform", d => (((d.endAngle - d.startAngle) / 2) + d.startAngle) > Math.PI ? "rotate(180) translate(-16)" : null)
             .attr("text-anchor", d => (((d.endAngle - d.startAngle) / 2) + d.startAngle) > Math.PI ? "end" : null)
-            .text(d => names[d.index]);
+            .text(d => names[d.index])
+            .attr('class','label-text-chord');
 
         svg.append("g")
             .attr("fill-opacity", 0.8)
@@ -77,6 +78,9 @@ export default class ChordDiagram extends Component {
             .attr("d", ribbon)
             .append("title")
             .text(d => `${formatValue(d.source.value)} ${names[d.target.index]} → ${names[d.source.index]}${d.source.index === d.target.index ? "" : `\n${formatValue(d.target.value)} ${names[d.source.index]} → ${names[d.target.index]}`}`);
+
+            svg.selectAll('.label-text-chord')
+            .call(wrap, 100);
 
     }
 
@@ -90,3 +94,29 @@ export default class ChordDiagram extends Component {
 
 
 
+function wrap(text, width) {
+    text.each(function () {
+        var text = d3.select(this),
+            words = text.text().split("-").reverse(),
+            word,
+            line = [],
+            lineNumber = 0,
+            lineHeight = 0.95, // ems
+            y = text.attr("y"),
+            x = text.attr('x'),
+            dy = parseFloat(text.attr("dy")),
+            tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
+
+        while (word = words.pop()) {
+            line.push(word);
+            tspan.text(line.join(" "));
+            if (tspan.node().getComputedTextLength() > width) {
+                line.pop();
+                tspan.text(line.join(" "));
+                line = [word];
+                tspan.attr('y', +y - 5);
+                tspan = text.append("tspan").attr("x", x).attr("y", +y - 5).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+            }
+        }
+    });
+}
