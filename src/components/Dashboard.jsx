@@ -41,16 +41,7 @@ class Dashboard extends Component {
             .then((data) => {
                 let dataMatrix = data.trim().split('\n').map((d) => d.trim().split(' '));
                 names.push(dataMatrix.slice(0, 1)[0]);
-
-                let matrix = dataMatrix.slice(1).map((d) => d.slice(1).map(t => +t));
-                let newMatrix = _.cloneDeep(matrix);
-                for (let i = 0; i < 8; i++) {
-                    for (let j = 0; j < 8; j++) {
-                        newMatrix[i][j] = matrix[j][i];
-                    }
-                }
-
-                chordData.push(newMatrix);
+                chordData.push(dataMatrix.slice(1).map((d) => d.slice(1).map(t => +t)));
                 return getFile('data/euro_crisis.csv');
             })
             .then((data) => {
