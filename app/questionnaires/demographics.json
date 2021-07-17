@@ -1,0 +1,53 @@
+{
+    "title": "Demographics",
+    "instructions": "Please answer the following questions.",
+    "code": "",
+    "questions": [{
+            "questiontype": "drop_down",
+            "instructions": "What is your gender?",
+            "id": "gender",
+            "dropheight": 104,
+            "items": [
+                "Man",
+                "Woman",
+                "Non-Binary",
+                "Other",
+                "Not Stated"
+            ]
+        },
+        {
+            "questiontype": "field",
+            "instructions": "What is your age?",
+            "decimals": 0,
+            "width": 60,
+            "min": 0,
+            "max": 100,
+            "id": "age"
+        },
+        {
+            "questiontype": "field",
+            "instructions": "How many hours per week (in an average week) do you use desktop or laptop computers?",
+            "decimals": 0,
+            "width": 60,
+            "min": 0,
+            "max": 100,
+            "id": "age"
+        },
+        {
+            "questiontype": "field",
+            "instructions": "What are the main types of data visualizations that you view or work with?",
+            "decimals": 0,
+            "width": 400,
+            "id": "visTypes"
+        },
+        {
+            "questiontype": "field",
+            "instructions": "How many hours per month, in an average month, do you view or work with data visualizations?",
+            "decimals": 0,
+            "width": 60,
+            "min": 0,
+            "max": 100,
+            "id": "visTime"
+        }
+    ]
+}

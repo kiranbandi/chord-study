@@ -1,0 +1,72 @@
+{% extends "template.html" %} {% block head %} {% endblock %} {% block content %}
+<!-- Bootstrap 3 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<link href="{{ url_for('my_blueprint.static', filename='style.css') }}" type="text/css" rel="stylesheet">
+<!-- other assets -->
+<script src="{{ url_for('my_blueprint.static', filename='js/libraries/d3.js') }}"></script>
+<script src="{{ url_for('my_blueprint.static', filename='js/libraries/jquery.js') }}"></script>
+<script src="{{ url_for('my_blueprint.static', filename='js/libraries/data.js') }}"></script>
+<script src="{{ url_for('my_blueprint.static', filename='js/libraries/chord.js') }}"></script>
+<script src="{{ url_for('my_blueprint.static', filename='js/libraries/sankey.js') }}"></script>
+<script src="{{ url_for('my_blueprint.static', filename='js/libraries/utils.js') }}"></script>
+<!-- Sankey chart external lib -->
+<script src="https://unpkg.com/d3-array@1"></script>
+<script src="https://unpkg.com/d3-collection@1"></script>
+<script src="https://unpkg.com/d3-path@1"></script>
+<script src="https://unpkg.com/d3-shape@1"></script>
+<script src="https://unpkg.com/d3-sankey@0"></script>
+
+
+<body>
+    <span id="cond" style="color:white"> {{ session['condition'] }} </span>
+    <div class="container text-center">
+        <svg class='d-block' id='chart'></svg>
+
+        <p>The following chart shows the </p>
+
+
+        <form id='question-box'>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias impedit architecto possimus eum quasi numquam id tempora libero cum laboriosam!</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                <label class="form-check-label" for="inlineCheckbox1">1</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                <label class="form-check-label" for="inlineCheckbox2">2</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                <label class="form-check-label" for="inlineCheckbox2">2</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                <label class="form-check-label" for="inlineCheckbox2">2</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                <label class="form-check-label" for="inlineCheckbox2">2</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                <label class="form-check-label" for="inlineCheckbox2">2</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                <label class="form-check-label" for="inlineCheckbox2">2</label>
+            </div>
+          
+
+        </form>
+        <button id='next' class="btn btn-primary">Submit</button>
+    </div>
+    <script src="{{ url_for('my_blueprint.static', filename='js/practice.js') }}"></script>
+</body>
+
+{% endblock %}

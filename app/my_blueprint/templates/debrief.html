@@ -1,0 +1,26 @@
+{% extends "template.html" %} {% block head %} {% endblock %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('my_blueprint.static') }}" /> {% block content %}
+<div>
+    <h1>Thank you very much for your participation. Your help is very much appreciated.</h1>
+    <br><br><br>
+    <p>
+        Please keep the details of this experiment to yourself and do not post this debrief information on any forums while the HIT is still running.
+    </p>
+    <p>
+        In this study, you were asked to complete tasks that required you to interact with a data visualization system.
+    </p>
+    <p>
+        The goal of this research is to add to the understanding of Chord Digrams and Parallel Plots.
+    </p>
+    <br><br><br>
+    <strong> Thanks again for your participation.</strong>
+</div>
+<br><br><br>
+<button type="button" onclick="ready()">Next</button>
+<hr>
+<script>
+    var ready = function() {
+        window.location.href = "/redirect_next_page";
+    }
+</script>
+{% endblock %}
