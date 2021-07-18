@@ -6,3 +6,21 @@ svg {
 .content {
     width: auto !important;
 }
+
+@keyframes flash {
+    0% {
+        fill: rgb(78, 121, 167);
+    }
+    50% {
+        fill: wheat;
+    }
+    100% {
+        fill: rgb(78, 121, 167);
+    }
+}
+
+path.animate {
+    animation-name: flash;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}

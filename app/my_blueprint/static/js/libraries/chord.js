@@ -6,8 +6,8 @@ function createChord(datasetName) {
     let colors = d3.schemeTableau10;
 
     let height = 1000, width = 1000,
-            outerRadius = Math.min(width, height) * 0.5 - 125,
-            innerRadius = outerRadius - 10;
+        outerRadius = Math.min(width, height) * 0.5 - 125,
+        innerRadius = outerRadius - 10;
 
     let formatValue = d3.format(".2");
 
@@ -74,9 +74,10 @@ function createChord(datasetName) {
         .join("path")
         .style("mix-blend-mode", "multiply")
         .attr("fill", d => color(names[d.source.index]))
+        .attr('class', d => names[d.source.index] + '-' + names[d.target.index])
         .attr("d", ribbon)
         .append("title")
-        .text(d => `${formatValue(d.source.value)} ${names[d.target.index]} → ${names[d.source.index]}${d.source.index === d.target.index ? "" : `\n${formatValue(d.target.value)} ${names[d.source.index]} → ${names[d.target.index]}`}`);
+        .text(d => `${formatValue(d.source.value)} ${names[d.target.index]} → ${names[d.source.index]}`);
 
     svg.selectAll('.label-text-chord')
         .call(wrap, 100);

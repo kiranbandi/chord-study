@@ -1,19 +1,11 @@
 {
-    "name": "snapshot-study",
+    "name": "chord-study",
     "version": "1.0.0",
     "description": "BOF study",
     "main": "run.py",
     "scripts": {
         "start": "nodemon --exec python3 run.py"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/kiranbandi/snapshot-study.git"
-    },
     "author": "",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/kiranbandi/snapshot-study/issues"
-    },
-    "homepage": "https://github.com/kiranbandi/snapshot-study#readme"
+    "license": "MIT"
 }

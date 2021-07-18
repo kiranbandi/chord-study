@@ -21,50 +21,61 @@
 
 <body>
     <span id="cond" style="color:white"> {{ session['condition'] }} </span>
-    <div class="container text-center">
+    <div class="container text-center mb-5">
         <svg class='d-block' id='chart'></svg>
 
-        <p>The following chart shows the </p>
+        <div id="study-intro" class="text-left">
+            <p>In this study you will be shown two kinds of data visualizations : <b>Chord Diagrams</b> and <b>Parallel
+                    Plots</b>.</p>
+            <p>You will be asked to use these visualizations to answer questions about 5 different datasets including a
+                sample dataset in the practice round.</p>
+            <p>To get started with the practice round, click the button below.</p>
 
+            <p class="text-center mt-2"> <button class="btn btn-primary next">Start Practice Round</button></p>
 
-        <form id='question-box'>
+        </div>
 
+        <div style="display:none" id="chord-intro" class="text-left">
+            <p>The chart pictured above is a chord diagram. It uses a cirular layout and connecting links to represent
+                information about the connected entities.</p>
+            <p>In this case, the chart is visualizing the flow of goods between 4 countries.
+                Each link represents the export of goods from one country to another.
+                The direction of the flow of goods is indicated by a pointed arrow at the end of the link.</p>
+            <p>For example : Take a look at the flashing link, it represents the export of goods from <b>Country A</b>
+                to
+                <b>Country B</b> as the pointed arrow at the end of the link ends at <b>Country B.</b>
+            </p>
+            <p>Now you will be asked 5 questions pertaining to this dataset and you will need to look at the
+                visualization and use it
+                to answer them. To get started click on the button below.</p>
+                <p class="text-center mt-2"> <button class="btn btn-primary next">Start</button></p>
+        </div>
+
+        <div style="display:none" id="sankey-intro" class="text-left">
+            <p>The chart pictured above is a Parallel Plot also known as a Sankey Diagram. It uses a horizontal layout and
+                connecting links to represent
+                information about the connected entities.</p>
+            <p>In this case, the chart is visualizing the flow of goods between 4 countries.
+                Each link represents the export of goods from one country to another.
+                The direction of the flow of goods is from left to right.</p>
+            <p>For example : Take a look at the flashing link, it represents the export of goods from Country A to
+                Country B as the link starts at <b>Country A</b> on the left hand side and then ends at <b>Country B</b>
+                on the right hand side.</p>
+            <p>Now you will be asked 5 questions pertaining to this dataset and you will need to look at the
+                visualization and use it
+                to answer each of them. To get started click on the button below.</p>
+                <p class="text-center mt-2"> <button class="btn btn-primary next">Start</button></p>
+        </div>
+
+        <form style="display:none" id='question-box' class="text-left">
             <div class="form-group">
-                <label for="exampleInputEmail1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias impedit architecto possimus eum quasi numquam id tempora libero cum laboriosam!</label>
+                <label id='question-label' class='question-label'></label>
             </div>
-
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                <label class="form-check-label" for="inlineCheckbox1">1</label>
+            <div id='choice-box' class="=form-group">
             </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                <label class="form-check-label" for="inlineCheckbox2">2</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                <label class="form-check-label" for="inlineCheckbox2">2</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                <label class="form-check-label" for="inlineCheckbox2">2</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                <label class="form-check-label" for="inlineCheckbox2">2</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                <label class="form-check-label" for="inlineCheckbox2">2</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                <label class="form-check-label" for="inlineCheckbox2">2</label>
-            </div>
-          
-
+            <p class="text-center mt-2"> <button class="btn btn-primary next">Submit</button></p>
         </form>
-        <button id='next' class="btn btn-primary">Submit</button>
+
     </div>
     <script src="{{ url_for('my_blueprint.static', filename='js/practice.js') }}"></script>
 </body>

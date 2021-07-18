@@ -42,7 +42,7 @@ var studyQuestions = {
         "questionType": "min-max",
         "label": "What country exports the largest total amount (including all destinations)?",
         "choices": ["Country A", "Country B", "Country C", "Country D"],
-        "answer": "Country D"
+        "answer": "Country A"
     }, {
         "questionType": "count-links",
         "label": "How many countries does Country C export to?",
@@ -158,7 +158,7 @@ var studyQuestions = {
         "answer": "3"
     }],
 
-    'B-practice': [{
+    'B-sample': [{
         "questionType": "existence",
         "label": "Is there a link from Country D to Country A?",
         "choices": ["Yes", "No"],
