@@ -118,16 +118,8 @@ function showQuestion() {
                 user_answer = $('input[name="answer-radio"]:checked').val();
 
             if (correct_answer == user_answer) {
-                logResponse();
-                // then go to next question
-                if (question_index < 4) {
-                    // increment question index
-                    question_index += 1;
-                    showQuestion();
-                }
-                else {
-                    logResponse(question_index, chartType, questionType, dataType);
-                }
+                button_clicked = true;
+                logResponse(chartType, questionType, dataType);
             }
             else {
                 wrong_count += 1;
@@ -140,10 +132,7 @@ function showQuestion() {
 }
 
 
-
-
-
-var logResponse = function (question_index, chartType, questionType, dataType) {
+function logResponse(chartType, questionType, dataType) {
 
     var endTime = new Date();
 
@@ -152,30 +141,40 @@ var logResponse = function (question_index, chartType, questionType, dataType) {
         trialStart: trialStartTime,
         trialEnd: endTime,
         trialTime: endTime - trialStartTime,
-        questionNumber: +question_index + 1,
-        'DataType': dataType,
-        'ChartType': chartType,
-        'QuestionType': questionType,
-        'Condition': condition
+        questionNumber: question_index + 1,
+        DataType: dataType,
+        ChartType: chartType,
+        QuestionType: questionType,
+        Condition: condition,
+        ErrorCount: wrong_count
     };
 
     $.post("#", trialResult).then(function () {
+
         // reset
         wrong_count = 0;
         button_clicked = false;
-        // increment current index 
-        currentIndex += 1;
-        if (currentIndex < question_map.length) {
-            // hide question box 
-            $('#question-box').hide();
-            // Switch to the next chart type 
-            intializeChart();
+
+        // then go to next question
+        if (question_index < 4) {
+            // increment question index
+            question_index += 1;
+            showQuestion();
         }
         else {
-            alert('The practice round is now complete. You will now start the actual study');
-            // go to next phase on the study
-            window.location.href = "/redirect_next_page";
+            // increment current index 
+            currentIndex += 1;
+            if (currentIndex < question_map.length) {
+                // hide question box 
+                $('#question-box').hide();
+                // Switch to the next chart type 
+                intializeChart();
+            }
+            else {
+                alert('The practice round is now complete. You will now start the actual study');
+                // go to next phase on the study
+                window.location.href = "/redirect_next_page";
+            }
         }
-
     })
 };

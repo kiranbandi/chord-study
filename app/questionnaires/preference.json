@@ -1,7 +1,7 @@
 {
     "title": "Visualization Preference",
     "instructions": "Please answer the following questions.",
-    "code": "",
+    "code": "<style>.evenRow>td:nth-child(1) {width: 0.5% !important;}</style>",
     "questions": [
         {
             "questiontype": "radiogrid",
@@ -18,10 +18,8 @@
             ]
         },
         {
-            "questiontype": "field",
+            "questiontype": "multi_field",
             "instructions": "Why did you prefer your selected choice of visualization?",
-            "decimals": 0,
-            "width": 400,
             "id": "data_viz_preference_text"
         }
     ]

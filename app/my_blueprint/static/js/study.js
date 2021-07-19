@@ -110,16 +110,8 @@ function showQuestion() {
                 user_answer = $('input[name="answer-radio"]:checked').val();
 
             if (correct_answer == user_answer) {
-                logResponse();
-                // then go to next question
-                if (question_index < 4) {
-                    // increment question index
-                    question_index += 1;
-                    showQuestion();
-                }
-                else {
-                    logResponse(question_index, chartType, questionType, dataType);
-                }
+                button_clicked = true;
+                logResponse(chartType, questionType, dataType);
             }
             else {
                 wrong_count += 1;
@@ -131,7 +123,7 @@ function showQuestion() {
 }
 
 
-function logResponse(question_index, chartType, questionType, dataType) {
+function logResponse(chartType, questionType, dataType) {
 
     var endTime = new Date();
 
@@ -141,28 +133,37 @@ function logResponse(question_index, chartType, questionType, dataType) {
         trialEnd: endTime,
         trialTime: endTime - trialStartTime,
         questionNumber: +question_index + 1,
-        'DataType': dataType,
-        'ChartType': chartType,
-        'QuestionType': questionType,
-        'Condition': condition
+        DataType: dataType,
+        ChartType: chartType,
+        QuestionType: questionType,
+        Condition: condition,
+        ErrorCount: wrong_count
     };
 
     $.post("#", trialResult).then(function () {
         // reset
         wrong_count = 0;
         button_clicked = false;
-        // increment current index 
-        currentIndex += 1;
-        if (currentIndex < question_map.length) {
-            // Switch to the next chart type 
-            intializeChart();
+
+        // then go to next question
+        if (question_index < 4) {
+            // increment question index
+            question_index += 1;
+            showQuestion();
         }
         else {
-            alert('The study is now complete. You will now be asked some questions about your experience during the study.');
-            // go to next phase on the study
-            window.location.href = "/redirect_next_page";
+            // increment current index 
+            currentIndex += 1;
+            if (currentIndex < question_map.length) {
+                // Switch to the next chart type 
+                intializeChart();
+            }
+            else {
+                alert('The study is now complete. You will now be asked some questions about your experience during the study.');
+                // go to next phase on the study
+                window.location.href = "/redirect_next_page";
+            }
         }
-
     })
 };
 

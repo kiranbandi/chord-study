@@ -42,3 +42,11 @@ svg {
     animation-duration: 1.5s;
     animation-iteration-count: infinite;
 }
+
+#question-label {
+    font-size: 17px;
+}
+
+.form-check-label {
+    font-size: 17px;
+}

@@ -28,6 +28,8 @@ def practice_results():
         log.ChartType = request.form['ChartType']
         log.QuestionType = request.form['QuestionType']
         log.questionNumber=request.form['questionNumber']
+        log.ErrorCount=request.form['ErrorCount']
+        
         db.session.add(log)
         db.session.commit()
     return render_template("practice.html", example="This is example text.")
@@ -49,6 +51,7 @@ def study_results():
         log.ChartType = request.form['ChartType']
         log.QuestionType = request.form['QuestionType']
         log.questionNumber=request.form['questionNumber']
+        log.ErrorCount=request.form['ErrorCount']
         db.session.add(log)
         db.session.commit()
     return render_template("study.html", example="This is example text.")
