@@ -14,6 +14,17 @@ var global_data = {
     'space': [[0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0]]
 };
 
+var data_intro = {
+    'immigration-chord': 'This chart shows the global bilateral flow of immigration between 1960 and 2015. The direction of the arrow of the link point to the flow of immigration from the origin to the destination.',
+    'immigration-sankey': 'This chart shows the global bilateral flow of immigration between 1960 and 2015. The direction of the flow of immigration from origin to destination is from left to right.',
+    'phone-chord':'This chart visualizes the responses of a mobile phone survey in Netherlands in 2000. Respondents gave information about the brands of their current and previous phones. The links in the chord diagram represent the share of users switching between different brands. The direction of the link point from the previous phone brand to the current one.',
+    'phone-sankey':'This chart visualizes the responses of a mobile phone survey in Netherlands in 2000. Respondents gave information about the brands of their current and previous phones. The previous phone brands are on the left and the current phone brands are on the right. The links from left to right represent the share of switching between the different phone brands.',
+    'debt-chord':'This chart visualizes the Debt Crisis in the European Union that started in 2009. The links in the chord diagram represent the debt owed between the different countries. The direction of the arrow of the link point from the country that has borrowed the money towards the country that it owes its debt to.',
+    'debt-sankey':'This chart visualizes the Debt Crisis in the European Union that started in 2009. The flow of links from left to right indicates the flow of debt such that the country on the left owes money to the country on the right.',
+    'space-chord':'This chart visualizes the flow of investments among companies that are pioneering in space research. The links represent the share of investment either received or given by a company. The direction of the arrow the of the link points from the funder company that has invested the money towards the company that it has invested in.',
+    'space-sankey':'This chart visualizes the flow of investments among companies that are pioneering in space research. The funder companies on the left have invested in the companies on the right and the links represent their share of investment',
+   };
+
 var condition_map = {
     '1': ['chord-A', 'sankey-B'],
     '2': ['chord-B', 'sankey-A'],
@@ -54,10 +65,10 @@ var studyQuestions = {
         "questionType": "existence",
         "label": "Is there a link from East Asia to South Asia?",
         "choices": ["Yes", "No"],
-        "answer": 'Yes'
+        "answer": 'No'
     }, {
         "questionType": "find-element",
-        "label": "Which region has the largest link going to Europe?",
+        "label": "Which region has the largest link going to Europe (including Europe)?",
         "choices": ['Africa', 'East Asia', 'Europe', 'Latin America', 'North America', 'Oceania', 'South Asia', 'South East Asia', 'Soviet Union', 'West Asia'],
         "answer": "Europe"
     }, {
@@ -84,14 +95,14 @@ var studyQuestions = {
         "answer": 'Yes'
     }, {
         "questionType": "find-element",
-        "label": "For Nokia users who switch brands, what do the largest number switch to?",
+        "label": "For current Nokia users who switched brands, what previous brand did the largest number switch from other than Nokia itself?",
         "choices": ['Apple', 'HTC', 'Huawei', 'LG', 'Samsung', 'Sony', 'Other'],
         "answer": "Other"
     }, {
         "questionType": "compare-magnitude",
         "label": "Do more Nokia users switch to Samsung or Other?",
         "choices": ["Samsung", "Other"],
-        "answer": "Other"
+        "answer": "Samsung"
     }, {
         "questionType": "min-max",
         "label": "Which brand had the largest number of users before the switch?",
@@ -214,12 +225,12 @@ var studyQuestions = {
 
     'B-phone': [{
         "questionType": "existence",
-        "label": "Does the chart show any users switching from LG to Huawei?",
+        "label": "Does the chart show any users switching from Other to LG?",
         "choices": ["Yes", "No"],
-        "answer": 'No'
+        "answer": 'Yes'
     }, {
         "questionType": "find-element",
-        "label": "For Sony users who switch brands, what does the largest group switch to?",
+        "label": "For previous Sony users who switched brands from Sony, what did the largest group switch to?",
         "choices": ['Apple', 'HTC', 'Huawei', 'LG', 'Nokia', 'Samsung', 'Other'],
         "answer": "Samsung"
     }, {
@@ -229,21 +240,21 @@ var studyQuestions = {
         "answer": "Samsung to Sony"
     }, {
         "questionType": "min-max",
-        "label": "Which brand has more total users after the switch: HTC or LG?",
-        "choices": ['HTC', 'LG'],
+        "label": "Which brand has more total users after the switch: HTC or Huawei?",
+        "choices": ['HTC', 'Huawei'],
         "answer": "HTC"
     }, {
         "questionType": "count-links",
-        "label": "How many different brands had users who switched to Samsung? (not counting people who stayed with Sony)?",
+        "label": "How many different brands had users who switched to Samsung? (not counting people who stayed with Samsung)?",
         "choices": ["0", "1", "2", "3", "4", "5", "6", "7", "8"],
-        "answer": "8"
+        "answer": "6"
     }],
 
     'B-debt': [{
         "questionType": "existence",
-        "label": "Does Portugal owe money to Italy?",
+        "label": "Does Germany owe money to Italy?",
         "choices": ["Yes", "No"],
-        "answer": 'No'
+        "answer": 'Yes'
     }, {
         "questionType": "find-element",
         "label": "Which country owes the most to France?",
@@ -268,7 +279,7 @@ var studyQuestions = {
 
     'B-space': [{
         "questionType": "existence",
-        "label": "Does funder Space Angels invest in company Leo Labs?",
+        "label": "Does funder Founders Fund invest in company Leo Labs?",
         "choices": ["Yes", "No"],
         "answer": 'No'
     }, {
@@ -278,7 +289,7 @@ var studyQuestions = {
         "answer": "Lynk"
     }, {
         "questionType": "compare-magnitude",
-        "label": "Which company has more investors: Planet or Leo Labs?",
+        "label": "Which company has more investors: Isotronic Systems or Leo Labs?",
         "choices": ["Isotronic Systems", "Leo Labs"],
         "answer": "Leo Labs"
     }, {

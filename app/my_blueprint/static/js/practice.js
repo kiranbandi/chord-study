@@ -50,7 +50,7 @@ function intializeChart() {
         // Hide the demo blinking 
         $('.Country-A-Country-B').removeClass('animate');
 
-        // Based on the chartType of the user condition show the corresponding intro 
+        // Based on the chartType of the user condition hide the corresponding intro 
         let value = question_map[currentIndex];
         let [chartType, questionType, dataType] = value.split('-');
         $('#' + chartType + '-intro').hide();
@@ -116,14 +116,16 @@ function showQuestion() {
                 showQuestion();
             }
             else {
+                // increment current index 
+                currentIndex += 1;
                 if (currentIndex < question_map.length) {
                     // hide question box 
                     $('#question-box').hide();
-                    // increment current index and go to the next chart type 
-                    currentIndex += 1;
+                    // Switch to the next chart type 
                     intializeChart();
                 }
                 else {
+                    alert('The practice round is now complete. You will now start the actual study');
                     // go to next phase on the study
                     window.location.href = "/redirect_next_page";
                 }

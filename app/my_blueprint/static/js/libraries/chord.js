@@ -26,7 +26,7 @@ function createChord(datasetName) {
 
     let color = d3.scaleOrdinal(names, colors);
 
-    const svg = d3.select('#chart');
+    const svg = d3.select('#chart').classed('chord', true);
     // clear contents
     svg.selectAll("*").remove();
 

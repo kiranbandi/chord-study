@@ -1,7 +1,7 @@
 {% extends "template.html" %} {% block head %} {% endblock %} {% block content %}
 <!-- Bootstrap 3 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 <link href="{{ url_for('my_blueprint.static', filename='style.css') }}" type="text/css" rel="stylesheet">
 <!-- other assets -->
@@ -11,8 +11,7 @@
 <script src="{{ url_for('my_blueprint.static', filename='js/libraries/chord.js') }}"></script>
 <script src="{{ url_for('my_blueprint.static', filename='js/libraries/sankey.js') }}"></script>
 <script src="{{ url_for('my_blueprint.static', filename='js/libraries/utils.js') }}"></script>
-
-<!-- Sankey chart external libraries -->
+<!-- Sankey chart external lib -->
 <script src="https://unpkg.com/d3-array@1"></script>
 <script src="https://unpkg.com/d3-collection@1"></script>
 <script src="https://unpkg.com/d3-path@1"></script>
@@ -22,9 +21,29 @@
 
 <body>
     <span id="cond" style="color:white"> {{ session['condition'] }} </span>
-    <div class="container text-center">
+    <div class="container text-center mb-5">
+
+        <div style="display:none" id="chord-data-intro" class="original-box text-left">
+            <p class="intro-text my-5"></p>
+            <p class="text-center mt-2"> <button class="btn btn-primary next">Start Questions</button></p>
+        </div>
+
+        <div style="display:none" id="sankey-data-intro" class="original-box text-left">
+            <p class="intro-text my-5"></p>
+            <p class="text-center mt-2"> <button class="btn btn-primary next">Start Questions</button></p>
+        </div>
+
         <svg class='d-block' id='chart'></svg>
-        <button id='next' class="btn btn-primary">Next</button>
+
+        <form style="display:none" id='question-box' class="original-box text-left">
+            <div class="form-group">
+                <label id='question-label' class='question-label'></label>
+            </div>
+            <div id='choice-box' class="=form-group">
+            </div>
+            <p class="text-center mt-2"> <button class="btn btn-primary next">Submit</button></p>
+        </form>
+
     </div>
     <script src="{{ url_for('my_blueprint.static', filename='js/study.js') }}"></script>
 </body>

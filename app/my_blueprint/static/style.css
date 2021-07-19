@@ -1,5 +1,5 @@
 svg {
-    width: 50%;
+    width: 75%;
     margin: 10px auto;
 }
 
@@ -7,7 +7,7 @@ svg {
     width: auto !important;
 }
 
-@keyframes flash {
+@keyframes flash-fill {
     0% {
         fill: rgb(78, 121, 167);
     }
@@ -19,8 +19,26 @@ svg {
     }
 }
 
-path.animate {
-    animation-name: flash;
+@keyframes flash-stroke {
+    0% {
+        stroke: rgb(78, 121, 167);
+    }
+    50% {
+        stroke: wheat;
+    }
+    100% {
+        stroke: rgb(78, 121, 167);
+    }
+}
+
+.chord path.animate {
+    animation-name: flash-fill;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+.sankey path.animate {
+    animation-name: flash-stroke;
     animation-duration: 1.5s;
     animation-iteration-count: infinite;
 }

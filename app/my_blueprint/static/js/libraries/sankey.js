@@ -36,7 +36,7 @@ function createSankey(datasetName) {
 
     let graph = graphifyData(keys, parallelData);
 
-    const svg = d3.select('#chart')
+    const svg = d3.select('#chart').classed('sankey', true)
         .attr("viewBox", [0, 0, width, height]);
 
     // clear contents
@@ -66,6 +66,7 @@ function createSankey(datasetName) {
         .data(links)
         .join("path")
         .attr("d", d3.sankeyLinkHorizontal())
+        .attr('class', d => d.names.join('-'))
         .attr("stroke", d => color(d.names[0]))
         .attr("stroke-width", d => d.width)
         .style("mix-blend-mode", "multiply")
