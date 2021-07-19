@@ -1,70 +1,70 @@
 {
-    "title": "TLX",
-    "instructions": "",
+    "title": "TLX - Chord Diagram",
+    "instructions": "Please answer the following questions based on how you felt while using the Chord Diagram Visualization",
     "code": "<style>.evenRow>td:nth-child(1) {width: 0.5% !important;}</style>",
     "questions": [{
             "questiontype": "radiogrid",
             "instructions": "Mental Demand<div style='font-weight: normal;'>How much mental and perceptual activity was required (e.g., thinking, deciding, calculating, remembering, looking, searching, etc.)? Was the task easy or demanding?</div>",
-            "id": "mental",
+            "id": "chord_mental",
             "shuffle": "true",
             "labels": ["Easy", "", "", "", "", "", "Demanding"],
             "q_text": [{
-                "id": "mental01",
+                "id": "chord_mental01",
                 "text": ""
             }]
         },
         {
             "questiontype": "radiogrid",
             "instructions": "Physical Demand<div style='font-weight: normal;'>How much physical activity was required (e.g., pushing, pulling, turning, controlling, activating, etc.)? Was the task easy and restful or demanding and laborious?</div>",
-            "id": "physical",
+            "id": "chord_physical",
             "shuffle": "true",
             "labels": ["Easy", "", "", "", "", "", "Demanding"],
             "q_text": [{
-                "id": "physical01",
+                "id": "chord_physical01",
                 "text": ""
             }]
         },
         {
             "questiontype": "radiogrid",
             "instructions": "Temporal Demand<div style='font-weight: normal;'>How much time pressure did you feel due to the rate at which the task elements occurred? Was the pace slow and leisurely or rapid and frantic?</div>",
-            "id": "temporal",
+            "id": "chord_temporal",
             "shuffle": "true",
             "labels": ["Slow", "", "", "", "", "", "Rapid"],
             "q_text": [{
-                "id": "temporal01",
+                "id": "chord_temporal01",
                 "text": ""
             }]
         },
         {
             "questiontype": "radiogrid",
             "instructions": "Performance<div style='font-weight: normal;'>How successful do you think you were in accomplishing the goals of the task set by the experiment (or yourself)? How satisfied were you with your performance in accomplishing these goals?</div>",
-            "id": "performance",
+            "id": "chord_performance",
             "shuffle": "true",
             "labels": ["Not Successful", "", "", "", "", "", "Very Successful"],
             "q_text": [{
-                "id": "performance01",
+                "id": "chord_performance01",
                 "text": ""
             }]
         },
         {
             "questiontype": "radiogrid",
             "instructions": "Effort<div style='font-weight: normal;'>How hard did you have to work (mentally and physically) to accomplish your level of performance?</div>",
-            "id": "effort",
+            "id": "chord_effort",
             "shuffle": "true",
             "labels": ["Low Effort", "", "", "", "", "", "High Effort"],
             "q_text": [{
-                "id": "effort01",
+                "id": "chord_effort01",
                 "text": ""
             }]
         },
         {
             "questiontype": "radiogrid",
             "instructions": "Frustration<div style='font-weight: normal;'>How insecure, discouraged, irritated, stressed and annoyed versus secure, gratified, content, relaxed and complacent did you feel during the task? </div>",
-            "id": "frustration",
+            "id": "chord_frustration",
             "shuffle": "true",
             "labels": ["Low Frustration", "", "", "", "", "", "High Frustration"],
             "q_text": [{
-                "id": "frustration01",
+                "id": "chord_frustration01",
                 "text": ""
             }]
         }

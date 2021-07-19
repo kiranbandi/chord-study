@@ -1,3 +1,4 @@
+var trialStartTime;
 // Get the list of datasets that we will be running the user through
 var data_name_list = Object.keys(global_names).filter((d) => d != 'sample');
 // First get the condition 
@@ -18,6 +19,10 @@ data_name_list.map((d) => {
 var currentIndex = 0;
 // Set the Question Iterator to zero
 var question_index = 0;
+// Count wrong answer attempts
+var wrong_count = 0;
+// Button click status - If button is already clicked dont do anything wait for the logging response from server
+var button_clicked = false;
 
 
 // Start with the first chart once the page loads up 
@@ -66,7 +71,6 @@ function showQuestion() {
     let [chartType, questionType, dataType] = value.split('-');
     let question_set = studyQuestions[questionType + '-' + dataType];
 
-
     // Show the questionBox 
     $('#question-box').show();
     // Set the question in the label 
@@ -85,50 +89,80 @@ function showQuestion() {
                 </div>`
         );
     });
+    // start loggin time , reset, wrong count and button clicked status
+    trialStartTime = new Date();
+    wrong_count = 0;
+    button_clicked = false;
 
 
     $('#question-box button.next').unbind('click').click((event) => {
         // prevent form from submitting
         event.preventDefault();
-        // validate the answer by getting the question set
 
-        let value = question_map[currentIndex];
-        let [chartType, questionType, dataType] = value.split('-');
-        let question_set = studyQuestions[questionType + '-' + dataType];
+        // debouncing button
+        if (!button_clicked) {
+            // validate the answer by getting the question set
+            let value = question_map[currentIndex];
+            let [chartType, questionType, dataType] = value.split('-');
+            let question_set = studyQuestions[questionType + '-' + dataType];
 
-        let correct_answer = question_set[question_index].answer,
-            user_answer = $('input[name="answer-radio"]:checked').val();
+            let correct_answer = question_set[question_index].answer,
+                user_answer = $('input[name="answer-radio"]:checked').val();
 
-        if (correct_answer == user_answer) {
-            // TODO log the answer 
-            // then go to next question
-            if (question_index < 4) {
-                // increment question index
-                question_index += 1;
-                showQuestion();
-            }
-            else {
-                // increment current index 
-                currentIndex += 1;
-                if (currentIndex < question_map.length) {
-                    // Switch to the next chart type 
-                    intializeChart();
+            if (correct_answer == user_answer) {
+                logResponse();
+                // then go to next question
+                if (question_index < 4) {
+                    // increment question index
+                    question_index += 1;
+                    showQuestion();
                 }
                 else {
-                    alert('The study is now complete. You will now be asked some questions about your experience during the study.');
-                    // go to next phase on the study
-                    window.location.href = "/redirect_next_page";
+                    logResponse(question_index, chartType, questionType, dataType);
                 }
             }
-        }
-        else {
-            alert('Sorry, that was the wrong answer. Please try again.');
+            else {
+                wrong_count += 1;
+                alert('Sorry, that was the wrong answer. Please try again.');
+            }
         }
     });
 
 }
 
 
+function logResponse(question_index, chartType, questionType, dataType) {
 
+    var endTime = new Date();
 
+    // formulate json to store in DB.
+    var trialResult = {
+        trialStart: trialStartTime,
+        trialEnd: endTime,
+        trialTime: endTime - trialStartTime,
+        questionNumber: +question_index + 1,
+        'DataType': dataType,
+        'ChartType': chartType,
+        'QuestionType': questionType,
+        'Condition': condition
+    };
+
+    $.post("#", trialResult).then(function () {
+        // reset
+        wrong_count = 0;
+        button_clicked = false;
+        // increment current index 
+        currentIndex += 1;
+        if (currentIndex < question_map.length) {
+            // Switch to the next chart type 
+            intializeChart();
+        }
+        else {
+            alert('The study is now complete. You will now be asked some questions about your experience during the study.');
+            // go to next phase on the study
+            window.location.href = "/redirect_next_page";
+        }
+
+    })
+};
 

@@ -10,6 +10,7 @@ my_blueprint = Blueprint('my_blueprint', __name__,
                          template_folder='templates',
                          static_folder='static')
 
+
 # practice page
 @my_blueprint.route("/practice", methods=['POST', 'GET'])
 @verify_correct_page
@@ -21,10 +22,12 @@ def practice_results():
         log.trialStart = request.form['trialStart']
         log.trialEnd = request.form['trialEnd']
         log.trialTime = request.form['trialTime']
-        log.studyMode = request.form['studyMode']
+        log.mode = 'practice'
+        log.Condition = request.form['Condition']
+        log.DataType = request.form['DataType']
+        log.ChartType = request.form['ChartType']
+        log.QuestionType = request.form['QuestionType']
         log.questionNumber=request.form['questionNumber']
-        log.response=request.form['response']
-        log.correct=request.form['correct']
         db.session.add(log)
         db.session.commit()
     return render_template("practice.html", example="This is example text.")
@@ -40,10 +43,12 @@ def study_results():
         log.trialStart = request.form['trialStart']
         log.trialEnd = request.form['trialEnd']
         log.trialTime = request.form['trialTime']
-        log.studyMode = request.form['studyMode']
+        log.mode = 'study'
+        log.Condition = request.form['Condition']
+        log.DataType = request.form['DataType']
+        log.ChartType = request.form['ChartType']
+        log.QuestionType = request.form['QuestionType']
         log.questionNumber=request.form['questionNumber']
-        log.response=request.form['response']
-        log.correct=request.form['correct']
         db.session.add(log)
         db.session.commit()
     return render_template("study.html", example="This is example text.")

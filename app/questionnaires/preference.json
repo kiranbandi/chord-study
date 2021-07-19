@@ -1,0 +1,28 @@
+{
+    "title": "Visualization Preference",
+    "instructions": "Please answer the following questions.",
+    "code": "",
+    "questions": [
+        {
+            "questiontype": "radiogrid",
+            "instructions": "Which Visualization did you prefer between the Chord Diagram and the Parallel Plot",
+            "labels": [
+                "Chord Diagram",
+                "Parallel Plot"
+            ],
+            "q_text": [
+                {
+                    "id": "data_viz_preference",
+                    "text": ""
+                }
+            ]
+        },
+        {
+            "questiontype": "field",
+            "instructions": "Why did you prefer your selected choice of visualization?",
+            "decimals": 0,
+            "width": 400,
+            "id": "data_viz_preference_text"
+        }
+    ]
+}
