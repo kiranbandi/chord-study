@@ -35,7 +35,7 @@
         },
         {
             "questiontype": "field",
-            "instructions": "What are the main types of data visualizations that you view or work with?",
+            "instructions": "What are the main types of data visualizations that you view or work with frequently?",
             "decimals": 0,
             "width": 400,
             "id": "visTypes"

@@ -15,14 +15,14 @@ var global_data = {
 };
 
 var data_intro = {
-    'immigration-chord': 'This chart shows the global bilateral flow of immigration between 1960 and 2015. The direction of the arrow of the link point to the flow of immigration from the origin to the destination.',
+    'immigration-chord': 'This chart shows the global bilateral flow of immigration between 1960 and 2015. The direction of the arrow in each link indicates the flow of immigration from origin to destination.',
     'immigration-sankey': 'This chart shows the global bilateral flow of immigration between 1960 and 2015. The direction of the flow of immigration from origin to destination is from left to right.',
-    'phone-chord':'This chart visualizes the responses of a mobile phone survey in Netherlands in 2000. Respondents gave information about the brands of their current and previous phones. The links in the chord diagram represent the share of users switching between different brands. The direction of the link point from the previous phone brand to the current one.',
+    'phone-chord':'This chart visualizes the responses of a mobile phone survey in Netherlands in 2000. Respondents gave information about the brands of their current and previous phones. The links in the chord diagram represent the share of users switching between different brands. The arrow on the link indicates the direction of switching (from previous phone brand to current brand).',
     'phone-sankey':'This chart visualizes the responses of a mobile phone survey in Netherlands in 2000. Respondents gave information about the brands of their current and previous phones. The previous phone brands are on the left and the current phone brands are on the right. The links from left to right represent the share of switching between the different phone brands.',
-    'debt-chord':'This chart visualizes the Debt Crisis in the European Union that started in 2009. The links in the chord diagram represent the debt owed between the different countries. The direction of the arrow of the link point from the country that has borrowed the money towards the country that it owes its debt to.',
-    'debt-sankey':'This chart visualizes the Debt Crisis in the European Union that started in 2009. The flow of links from left to right indicates the flow of debt such that the country on the left owes money to the country on the right.',
-    'space-chord':'This chart visualizes the flow of investments among companies that are pioneering in space research. The links represent the share of investment either received or given by a company. The direction of the arrow the of the link points from the funder company that has invested the money towards the company that it has invested in.',
-    'space-sankey':'This chart visualizes the flow of investments among companies that are pioneering in space research. The funder companies on the left have invested in the companies on the right and the links represent their share of investment',
+    'debt-chord':'This chart visualizes the debt crisis that started in 2009. The links in the chord diagram represent the debt owed between the different countries. The direction of the arrow of the link point from the country that has borrowed the money towards the country that it owes its debt to.',
+    'debt-sankey':'This chart visualizes the debt crisis that started in 2009. The flow of links from left to right indicates the flow of debt such that the country on the left owes money to the country on the right.',
+    'space-chord':'This chart visualizes the flow of investments among companies that are pioneering in space research. The links represent investment either received or given by a company. The direction of the arrow the of the link points from the funder company that has invested the money towards the company that it has invested in.',
+    'space-sankey':'This chart visualizes the flow of investments among companies that are pioneering in space research. The funder companies on the left have invested in the companies on the right and the links represent their investment',
    };
 
 var condition_map = {
@@ -95,7 +95,7 @@ var studyQuestions = {
         "answer": 'Yes'
     }, {
         "questionType": "find-element",
-        "label": "For current Nokia users who switched brands, what previous brand did the largest number switch from other than Nokia itself?",
+        "label": "What brand had the largest number switch to Nokia (not counting Nokia itself)?",
         "choices": ['Apple', 'HTC', 'Huawei', 'LG', 'Samsung', 'Sony', 'Other'],
         "answer": "Other"
     }, {
@@ -110,7 +110,7 @@ var studyQuestions = {
         "answer": "Samsung"
     }, {
         "questionType": "count-links",
-        "label": "How many different brands had users who switched to Sony? (not counting people who stayed with Sony)?",
+        "label": "How many different brands had users who switched to Sony? (not counting people who stayed with Sony)",
         "choices": ["0", "1", "2", "3", "4", "5", "6", "7", "8"],
         "answer": "6"
     }],
@@ -186,12 +186,12 @@ var studyQuestions = {
         "answer": "Country D to Country B"
     }, {
         "questionType": "min-max",
-        "label": "What country receives the smallest total exports (including all sources)?",
+        "label": "What country receives the smallest total amount (including all sources)?",
         "choices": ["Country A", "Country B", "Country C", "Country D"],
         "answer": "Country C"
     }, {
         "questionType": "count-links",
-        "label": "How many countries does Country B receive exports from?",
+        "label": "How many countries does Country B receive goods from?",
         "choices": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
         "answer": "3"
     }],
@@ -230,7 +230,7 @@ var studyQuestions = {
         "answer": 'Yes'
     }, {
         "questionType": "find-element",
-        "label": "For previous Sony users who switched brands from Sony, what did the largest group switch to?",
+        "label": "For previous Sony users who switched brands (not counting Sony itself), what did the largest group switch to?",
         "choices": ['Apple', 'HTC', 'Huawei', 'LG', 'Nokia', 'Samsung', 'Other'],
         "answer": "Samsung"
     }, {
@@ -245,7 +245,7 @@ var studyQuestions = {
         "answer": "HTC"
     }, {
         "questionType": "count-links",
-        "label": "How many different brands had users who switched to Samsung? (not counting people who stayed with Samsung)?",
+        "label": "How many different brands had users who switched to Samsung? (not counting people who stayed with Samsung)",
         "choices": ["0", "1", "2", "3", "4", "5", "6", "7", "8"],
         "answer": "6"
     }],
@@ -289,8 +289,8 @@ var studyQuestions = {
         "answer": "Lynk"
     }, {
         "questionType": "compare-magnitude",
-        "label": "Which company has more investors: Isotronic Systems or Leo Labs?",
-        "choices": ["Isotronic Systems", "Leo Labs"],
+        "label": "Which company has more investors: Isotropic Systems or Leo Labs?",
+        "choices": ["Isotropic Systems", "Leo Labs"],
         "answer": "Leo Labs"
     }, {
         "questionType": "min-max",

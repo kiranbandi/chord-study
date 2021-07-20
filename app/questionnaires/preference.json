@@ -5,15 +5,43 @@
     "questions": [
         {
             "questiontype": "radiogrid",
-            "instructions": "Which Visualization did you prefer between the Chord Diagram and the Parallel Plot",
+            "instructions": "With which visualization type were you able to answer the questions fastest?",
+            "id": "viz_preference_fastest",
             "labels": [
                 "Chord Diagram",
                 "Parallel Plot"
             ],
             "q_text": [
                 {
-                    "id": "data_viz_preference",
-                    "text": ""
+                    "id": "viz_preference_fastest0"
+                }
+            ]
+        },
+        {
+            "questiontype": "radiogrid",
+            "instructions": "With which visualization type were you able to answer the questions most accurately?",
+            "id": "viz_preference_accuracy",
+            "labels": [
+                "Chord Diagram",
+                "Parallel Plot"
+            ],
+            "q_text": [
+                {
+                    "id": "viz_preference_accuracy0"
+                }
+            ]
+        },
+        {
+            "questiontype": "radiogrid",
+            "instructions": "Which visualization type did you prefer overall?",
+            "id": "viz_preference_overall",
+            "labels": [
+                "Chord Diagram",
+                "Parallel Plot"
+            ],
+            "q_text": [
+                {
+                    "id": "viz_preference_overall0"
                 }
             ]
         },

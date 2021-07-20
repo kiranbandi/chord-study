@@ -36,7 +36,7 @@ function createSankey(datasetName) {
 
     let graph = graphifyData(keys, parallelData);
 
-    const svg = d3.select('#chart').classed('sankey', true)
+    const svg = d3.select('#chart').classed('chord', false).classed('sankey', true)
         .attr("viewBox", [0, 0, width, height]);
 
     // clear contents
