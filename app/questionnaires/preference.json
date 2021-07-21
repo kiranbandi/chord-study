@@ -48,7 +48,8 @@
         {
             "questiontype": "multi_field",
             "instructions": "Why did you prefer your selected choice of visualization?",
-            "id": "data_viz_preference_text"
+            "id": "data_viz_preference_text",
+            "required": true
         }
     ]
 }
