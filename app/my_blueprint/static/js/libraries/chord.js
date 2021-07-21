@@ -77,7 +77,7 @@ function createChord(datasetName) {
         .attr('class', d => names[d.source.index] + '-' + names[d.target.index])
         .attr("d", ribbon)
         .append("title")
-        .text(d => `${formatValue(d.source.value)} ${names[d.target.index]} → ${names[d.source.index]}`);
+        .text(d => `${formatValue(d.source.value)}`);
 
     svg.selectAll('.label-text-chord')
         .call(wrap, 100);

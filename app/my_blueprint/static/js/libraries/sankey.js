@@ -71,7 +71,7 @@ function createSankey(datasetName) {
         .attr("stroke-width", d => d.width)
         .style("mix-blend-mode", "multiply")
         .append("title")
-        .text(d => `${d.names.join(" → ")}\n${d.value.toLocaleString()}`);
+        .text(d => `${d.value.toLocaleString()}`);
 
     svg.append("g")
         .style("font", "15px sans-serif")
