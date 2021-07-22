@@ -19,6 +19,8 @@ data_list.map((d) => {
 var currentIndex = 0;
 // Set the Question Iterator to zero
 var question_index = 0;
+// Overall question interator 
+var overall_question_index = 0;
 // Count wrong answer attempts
 var wrong_count = 0;
 // Button click status - If button is already clicked dont do anything wait for the logging response from server
@@ -142,6 +144,7 @@ function logResponse(chartType, questionType, dataType) {
         trialEnd: endTime,
         trialTime: endTime - trialStartTime,
         questionNumber: question_index + 1,
+        overallQuestionNumber: overall_question_index + 1,
         DataType: dataType,
         ChartType: chartType,
         QuestionType: questionType,
@@ -159,6 +162,8 @@ function logResponse(chartType, questionType, dataType) {
         if (question_index < 4) {
             // increment question index
             question_index += 1;
+            // increment overall question index
+            overall_question_index += 1;
             showQuestion();
         }
         else {

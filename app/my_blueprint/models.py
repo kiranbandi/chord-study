@@ -13,6 +13,7 @@ def create(db):
         QuestionType = db.Column(db.String)
         DataType = db.Column(db.String)
         questionNumber = db.Column(db.String)
+        overallQuestionNumber = db.Column(db.String)
         ErrorCount = db.Column(db.String)
     return chord
 
