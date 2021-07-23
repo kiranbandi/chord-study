@@ -8,7 +8,7 @@ var participantID = getParticipant();
 // Then get the corresponding map based on the condition 
 var condition_set = condition_map[condition];
 // Balanced latin square for data type 
-var data_name_list = balancedLatinSquare(name_list,participantID);
+var [data_name_list, QorderID] = balancedLatinSquare(name_list, participantID);
 
 // Create a question set based on the condition 
 //  for example if a user has condition ['chord-A','sankey-B'] ,
@@ -144,6 +144,7 @@ function logResponse(chartType, questionType, dataType) {
         ChartType: chartType,
         QuestionType: questionType,
         Condition: condition,
+        DataTypeOrder: QorderID,
         ErrorCount: wrong_count
     };
 
@@ -184,7 +185,7 @@ function logResponse(chartType, questionType, dataType) {
 // balancedLatinSquare(conditions, 2)  //=> ["C", "D", "B", "A"]
 // ...
 function balancedLatinSquare(array, participantId) {
-    result = [];
+    var result = [];
     // Based on "Bradley, J. V. Complete counterbalancing of immediate sequential effects in a Latin square design. J. Amer. Statist. Ass.,.1958, 53, 525-528. "
     for (var i = 0, j = 0, h = 0; i < array.length; ++i) {
         var val = 0;
@@ -203,5 +204,5 @@ function balancedLatinSquare(array, participantId) {
         result = result.reverse();
     }
 
-    return result;
+    return [result, idx];
 }

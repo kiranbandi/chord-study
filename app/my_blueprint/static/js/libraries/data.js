@@ -213,9 +213,9 @@ var studyQuestions = {
         "answer": "Latin America to Europe"
     }, {
         "questionType": "min-max",
-        "label": "What region has the largest link to itself (self-migration)?",
+        "label": "Which region has the largest link going to West Asia?",
         "choices": ['Africa', 'East Asia', 'Europe', 'Latin America', 'North America', 'Oceania', 'South Asia', 'South East Asia', 'Soviet Union', 'West Asia'],
-        "answer": "Africa"
+        "answer": "South Asia"
     }, {
         "questionType": "count-links",
         "label": "How many links go to West Asia?",

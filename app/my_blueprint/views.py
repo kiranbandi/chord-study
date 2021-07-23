@@ -24,6 +24,7 @@ def practice_results():
         log.trialTime = request.form['trialTime']
         log.mode = 'practice'
         log.Condition = request.form['Condition']
+        log.DataTypeOrder = request.form['DataTypeOrder']
         log.DataType = request.form['DataType']
         log.ChartType = request.form['ChartType']
         log.QuestionType = request.form['QuestionType']
@@ -48,6 +49,7 @@ def study_results():
         log.trialTime = request.form['trialTime']
         log.mode = 'study'
         log.Condition = request.form['Condition']
+        log.DataTypeOrder = request.form['DataTypeOrder']
         log.DataType = request.form['DataType']
         log.ChartType = request.form['ChartType']
         log.QuestionType = request.form['QuestionType']

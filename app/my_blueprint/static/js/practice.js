@@ -149,6 +149,7 @@ function logResponse(chartType, questionType, dataType) {
         ChartType: chartType,
         QuestionType: questionType,
         Condition: condition,
+        DataTypeOrder: '-1',
         ErrorCount: wrong_count
     };
 
