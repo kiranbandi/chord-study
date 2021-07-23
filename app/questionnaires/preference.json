@@ -1,8 +1,13 @@
 {
     "title": "Visualization Preference",
     "instructions": "Please answer the following questions.",
-    "code": "<style>.evenRow>td:nth-child(1) {width: 0.5% !important;}</style>",
+    "code": "<style>.evenRow>td:nth-child(1) {width: 0.5% !important;} #q_s>.question:nth-child(1)>div {height: 500px;background-size: 500px;background-repeat: no-repeat;background-position: center;background-image: url(../my_blueprint/images/both.png);}</style>",
     "questions": [
+        {
+            "questiontype": "textview",
+            "title": "The following questions are based on your preference between both the visualizations.",
+            "text": ""
+        },
         {
             "questiontype": "radiogrid",
             "instructions": "With which visualization type were you able to answer the questions fastest?",

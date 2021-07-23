@@ -1,10 +1,14 @@
 var trialStartTime;
 // Get the list of datasets that we will be running the user through
-var data_name_list = Object.keys(global_names).filter((d) => d != 'sample');
+var name_list = ["immigration", "phone", "debt", "space"];
 // First get the condition 
 var condition = getCond();
+// Then get the participant ID
+var participantID = getParticipant();
 // Then get the corresponding map based on the condition 
 var condition_set = condition_map[condition];
+// Balanced latin square for data type 
+var data_name_list = balancedLatinSquare(name_list,participantID);
 
 // Create a question set based on the condition 
 //  for example if a user has condition ['chord-A','sankey-B'] ,
@@ -172,3 +176,32 @@ function logResponse(chartType, questionType, dataType) {
     })
 };
 
+
+// How to use:
+// var conditions = ["A", "B", "C", "D"];
+// balancedLatinSquare(conditions, 0)  //=> ["A", "B", "D", "C"]
+// balancedLatinSquare(conditions, 1)  //=> ["B", "C", "A", "D"]
+// balancedLatinSquare(conditions, 2)  //=> ["C", "D", "B", "A"]
+// ...
+function balancedLatinSquare(array, participantId) {
+    result = [];
+    // Based on "Bradley, J. V. Complete counterbalancing of immediate sequential effects in a Latin square design. J. Amer. Statist. Ass.,.1958, 53, 525-528. "
+    for (var i = 0, j = 0, h = 0; i < array.length; ++i) {
+        var val = 0;
+        if (i < 2 || i % 2 != 0) {
+            val = j++;
+        } else {
+            val = array.length - h - 1;
+            ++h;
+        }
+
+        var idx = (val + participantId) % array.length;
+        result.push(array[idx]);
+    }
+
+    if (array.length % 2 != 0 && participantId % 2 != 0) {
+        result = result.reverse();
+    }
+
+    return result;
+}
