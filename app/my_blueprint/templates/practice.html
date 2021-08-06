@@ -3,7 +3,11 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-<link href="{{ url_for('my_blueprint.static', filename='style.css') }}" type="text/css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+<link href="{{ url_for('my_blueprint.static', filename='newfiles/static/css/2.c1e28d34.chunk.css') }}" type="text/css" rel="stylesheet">
+<link href="{{ url_for('my_blueprint.static', filename='newfiles/static/css/main.e5dc910b.chunk.css') }}" type="text/css" rel="stylesheet">
 <!-- other assets -->
 <script src="{{ url_for('my_blueprint.static', filename='js/libraries/d3.js') }}"></script>
 <script src="{{ url_for('my_blueprint.static', filename='js/libraries/jquery.js') }}"></script>
@@ -21,63 +25,11 @@
 
 <body>
     <span id="cond" style="color:white"> {{ session['condition'] }} </span>
-    <div class="container text-center mb-5">
-        <svg class='d-block' id='chart'></svg>
+    <div id='root'></div>
+    <script src="{{ url_for('my_blueprint.static', filename='newfiles/static/js/2.b1784bd1.chunk.js') }}"></script>
+    <script src="{{ url_for('my_blueprint.static', filename='newfiles/static/js/main.8776363d.chunk.js') }}"></script>
 
-        <div id="study-intro" class="text-left">
-            <p>In this study you will be shown two kinds of data visualizations : <b>Chord Diagrams</b> and <b>Parallel
-                    Plots</b>.</p>
-            <p>You will be asked to use these visualizations to answer questions about 5 different datasets including a
-                sample dataset in the practice round.</p>
-            <p>To get started with the practice round, click the button below.</p>
-
-            <p class="text-center mt-4"> <button class="btn btn-primary next">Start Practice Round</button></p>
-
-        </div>
-
-        <div style="display:none" id="chord-intro" class="text-left">
-            <p>The chart pictured above is a chord diagram. It uses a cirular layout and connecting links to represent
-                information about the connected entities.</p>
-            <p>The chart is visualizing the flow of goods between 4 countries.
-                Each link represents the export of goods from one country to another.
-                The direction of the flow of goods is indicated by a pointed arrow at the end of the link.</p>
-            <p>For example : The flashing link in the chart above represents the export of goods from <b>Country A</b>
-                to
-                <b>Country B</b> as the pointed arrow at the end of the link ends at <b>Country B.</b>
-            </p>
-            <p>Now you will be asked 5 questions pertaining to this dataset and you will need to look at the
-                visualization and use it
-                to answer them. Please answer as quickly and accurately as possible. To get started click on the button below.</p>
-                <p class="text-center mt-2"> <button class="btn btn-primary next">Start</button></p>
-        </div>
-
-        <div style="display:none" id="sankey-intro" class="text-left">
-            <p>The chart pictured above is a Parallel Plot also known as a Sankey Diagram. It uses a horizontal layout and
-                connecting links to represent
-                information about the connected entities.</p>
-            <p>The chart is visualizing the flow of goods between 4 countries.
-                Each link represents the export of goods from one country to another.
-                The direction of the flow of goods is from left to right.</p>
-            <p>For example : The flashing link in the chart above represents the export of goods from Country A to
-                Country B as the link starts at <b>Country A</b> on the left hand side and then ends at <b>Country B</b>
-                on the right hand side.</p>
-            <p>Now you will be asked 5 questions pertaining to this dataset and you will need to look at the
-                visualization and use it
-                to answer each of them. Please answer as quickly and accurately as possible. To get started click on the button below.</p>
-                <p class="text-center mt-2"> <button class="btn btn-primary next">Start</button></p>
-        </div>
-
-        <form style="display:none" id='question-box' class="text-left">
-            <div class="form-group">
-                <label id='question-label'></label>
-            </div>
-            <div id='choice-box' class="=form-group">
-            </div>
-            <p class="text-center mt-2"> <button class="btn btn-primary next">Submit</button></p>
-        </form>
-
-    </div>
-    <script src="{{ url_for('my_blueprint.static', filename='js/practice.js') }}"></script>
+<script>!function (e) { function r(r) { for (var n, i, a = r[0], f = r[1], l = r[2], c = 0, s = []; c < a.length; c++)i = a[c], Object.prototype.hasOwnProperty.call(o, i) && o[i] && s.push(o[i][0]), o[i] = 0; for (n in f) Object.prototype.hasOwnProperty.call(f, n) && (e[n] = f[n]); for (p && p(r); s.length;)s.shift()(); return u.push.apply(u, l || []), t() } function t() { for (var e, r = 0; r < u.length; r++) { for (var t = u[r], n = !0, a = 1; a < t.length; a++) { var f = t[a]; 0 !== o[f] && (n = !1) } n && (u.splice(r--, 1), e = i(i.s = t[0])) } return e } var n = {}, o = { 1: 0 }, u = []; function i(r) { if (n[r]) return n[r].exports; var t = n[r] = { i: r, l: !1, exports: {} }; return e[r].call(t.exports, t, t.exports, i), t.l = !0, t.exports } i.m = e, i.c = n, i.d = function (e, r, t) { i.o(e, r) || Object.defineProperty(e, r, { enumerable: !0, get: t }) }, i.r = function (e) { "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }), Object.defineProperty(e, "__esModule", { value: !0 }) }, i.t = function (e, r) { if (1 & r && (e = i(e)), 8 & r) return e; if (4 & r && "object" == typeof e && e && e.__esModule) return e; var t = Object.create(null); if (i.r(t), Object.defineProperty(t, "default", { enumerable: !0, value: e }), 2 & r && "string" != typeof e) for (var n in e) i.d(t, n, function (r) { return e[r] }.bind(null, n)); return t }, i.n = function (e) { var r = e && e.__esModule ? function () { return e.default } : function () { return e }; return i.d(r, "a", r), r }, i.o = function (e, r) { return Object.prototype.hasOwnProperty.call(e, r) }, i.p = "/timemap/"; var a = this["webpackJsonpinfovis-maps"] = this["webpackJsonpinfovis-maps"] || [], f = a.push.bind(a); a.push = r, a = a.slice(); for (var l = 0; l < a.length; l++)r(a[l]); var p = f; t() }([])</script>
 </body>
 
 {% endblock %}
